@@ -1,0 +1,172 @@
+:root {
+    --eco-forest: #1f4d3a;
+    --eco-forest-dark: #163a2b;
+    --eco-leaf: #4c9a6a;
+    --eco-moss: #7ba05b;
+    --eco-cream: #f5f2e8;
+    --eco-earth: #6b4f3b;
+}
+
+body {
+    background-color: var(--eco-cream);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #2b3a2f;
+}
+
+.navbar {
+    background-color: var(--eco-forest);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+    color: #f5f2e8 !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(245, 242, 232, 0.85) !important;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(245, 242, 232, 0.5);
+}
+
+.alert-primary {
+    background-color: var(--eco-moss);
+    border-color: var(--eco-leaf);
+    color: #f5f2e8;
+    border-radius: 0;
+}
+
+main {
+    min-height: 60vh;
+}
+
+.btn-primary {
+    background-color: var(--eco-leaf);
+    border-color: var(--eco-leaf);
+}
+
+.btn-primary:hover {
+    background-color: var(--eco-forest);
+    border-color: var(--eco-forest);
+}
+
+.btn-outline-primary {
+    color: var(--eco-forest);
+    border-color: var(--eco-leaf);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--eco-moss);
+    border-color: var(--eco-moss);
+    color: #f5f2e8;
+}
+
+a {
+    color: var(--eco-forest);
+}
+
+a:hover {
+    color: var(--eco-leaf);
+}
+
+.eco-table thead th {
+    color: var(--eco-forest-dark);
+    font-weight: 600;
+}
+
+.eco-table tbody tr:hover {
+    background-color: rgba(76, 154, 106, 0.1);
+}
+
+.eco-heading {
+    display: inline-block;
+    vertical-align: baseline;
+    margin: 0 10px 1.5rem 0;
+    font-weight: 600;
+}
+
+h1.eco-heading {
+    font-size: 2rem;
+    color: var(--eco-forest);
+}
+
+h2.eco-heading {
+    font-size: 1.4rem;
+    color: var(--eco-leaf);
+    font-weight: 500;
+}
+
+h3.eco-heading {
+    font-size: 1.1rem;
+    color: var(--eco-forest-dark);
+    font-weight: 500;
+}
+
+.eco-highlight {
+    color: var(--eco-leaf);
+    font-weight: 700;
+}
+
+.eco-form {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.form-control {
+    border-color: rgba(31, 77, 58, 0.25);
+}
+
+.form-control:focus {
+    border-color: var(--eco-leaf);
+    box-shadow: 0 0 0 0.2rem rgba(76, 154, 106, 0.2);
+}
+
+.eco-calculator {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 2.4;
+    color: #2b3a2f;
+}
+
+.eco-calculator select,
+.eco-calculator input {
+    vertical-align: middle;
+    border-color: rgba(31, 77, 58, 0.25);
+}
+
+.eco-calculator select:focus,
+.eco-calculator input:focus {
+    border-color: var(--eco-leaf);
+    box-shadow: 0 0 0 0.2rem rgba(76, 154, 106, 0.2);
+    outline: none;
+}
+
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-row form {
+    display: flex;
+    align-items: center;
+}
