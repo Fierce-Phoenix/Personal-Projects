@@ -6,10 +6,6 @@ The application was developed using the Codespaces extension in Visual Studio Co
 
 Vehicle data is sourced from [fueleconomy.gov](https://www.fueleconomy.gov/feg/download.shtml) and covers models sold in the United States between 1984 and 2026.
 
-## Video Demo
-
-https://youtu.be/3Vz7b6RM_mM
-
 ## Source Files
 
 - `app.py` – The main application file, containing the application's routes and functions.
