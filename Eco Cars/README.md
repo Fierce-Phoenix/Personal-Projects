@@ -1,47 +1,56 @@
-## Eco Cars
-Eco Cars is a web application that allows prospective vehicle buyers to compare the efficiency and emmissions of vehicles in one place. Each vehicle can be shortlisted and compared against other vehicles. They can then use the information made available to them to make an informed purchasing decision. Users can also use the homepage to calculate carbon emmissions and fuel consumption by providing how many miles they intend to drive.
+# Eco Cars
 
-The app was developed using the Codespaces plugin in Visual Studio Code.
+Eco Cars is a web application that allows prospective vehicle buyers to compare the efficiency and emissions of vehicles in one place. Vehicles can be shortlisted and compared against one another, enabling users to make an informed purchasing decision. The homepage also provides a calculator that estimates carbon emissions and fuel consumption based on the number of miles a user intends to drive.
 
-The project is built using Python, Flask and Javascript. It uses SQLite3 for database management. Elements of Bootstrap have been used to make this app more interactive and user friendly.
+The application was developed using the Codespaces extension in Visual Studio Code. It is built with Python, Flask and JavaScript, uses SQLite3 for database management, and uses Bootstrap components to provide a responsive and user-friendly interface.
 
-The vehicle emmisions data is provided by https://www.fueleconomy.gov/feg/download.shtml. It comprises of vehicle data of models sold in the United States which were sold from 1984 to 2026.
+Vehicle data is sourced from [fueleconomy.gov](https://www.fueleconomy.gov/feg/download.shtml) and covers models sold in the United States between 1984 and 2026.
 
-## Youtube demo
+## Video Demo
+
 https://youtu.be/3Vz7b6RM_mM
 
 ## Source Files
-app.py - Main source file comprising of functions and routes for the app.
-helpers.py - Custom helper function for users requiring login. This file is directly based on the helpers.py provided to us to be used in the CS50 Finance problem set.
 
-## Explaing the app
+- `app.py` – The main application file, containing the application's routes and functions.
+- `helpers.py` – A custom helper providing the `login_required` decorator for routes that require an authenticated user. It is based on the `helpers.py` supplied with the CS50 Finance problem set.
 
-# Homepage
-The homepage is a calculator wherein users can calculate estimated emmissions and fuel consumption by inputing their mileage. All required data is selected from the SQL database and sent to the html. Javascript is used on the front end to convert the data into json and the webpage updates dynamically every time the user interacts with it.
+## Application Overview
 
-# Search
-This uses a different approach to search for vehicles as compared to the homepage. Initially, a template is rendered comprising only of the selected make, followed by the model and the year. Precautions have been set in to ensure that user does not submit a vehicle which does not exist on the database. Once the user submits his/her query, the webpage renders a table of the selected vehicles.
+### Homepage
 
-# Compare
-This allows users to temporarily add vehicles to a comparison list and determine which vehicle they should shortlist. The comparison list gets reset every time the user logs out from the website.
+The homepage is a calculator that estimates emissions and fuel consumption from a mileage value entered by the user. The required vehicle data is retrieved from the database and passed to the template, where JavaScript converts it to JSON. The page then updates dynamically as the user interacts with it.
 
-# Shortlisted Vehicles
-Similar to 'Compare', Shortlisted Vehicles allows users to add vehicles to a list which they can use to make a conscious purchasing decision. Unlike 'Compare', this list is permanent and vehicles can only be removed from the list if the user manually removes it from the list.
+### Search
 
-## Register, Login, Reset Password and Delete Account
-# Register
-Users can set up a new account by selecting their own username and password combinations. Every username is unique and the user is notified if the username they wish to use already exists. Passwords are hashed and saved to the database
+Search uses a different approach from the homepage. The user first selects a make, then a model, then a year, with each selection rendering the next set of options. This ensures that only vehicles present in the database can be submitted. Once a search is submitted, a table of the matching vehicles is displayed.
 
-# Login
-The users table in the project database is accessed to allow users to login to the website. Passwords from the database are decrypted and then verified.
+### Compare
 
-# Reset Password
-This feature allows users to reset their password if they feel the need to do so. Users are required to input their previous password and reverify their new one.
+The comparison list allows users to temporarily gather vehicles side by side in order to decide which to shortlist. The list is cleared each time the user logs out.
 
-# Delete Account
-This gives users to delete their accoount and all information associated with their account if they wish to. When the account is set up for deletion, all the user associated data is individually cleared from every table in the database including any credentials.
+### Shortlisted Vehicles
 
+The shortlist allows users to save vehicles for later consideration. Unlike the comparison list, the shortlist is persistent: a vehicle remains on it until the user removes it.
+
+## Account Management
+
+### Register
+
+Users create an account by choosing a username and password. Usernames must be unique, and the user is notified if the chosen username is already in use. Passwords are hashed before being stored in the database.
+
+### Login
+
+Credentials are checked against the `users` table in the project database. The submitted password is verified against the stored password hash.
+
+### Reset Password
+
+Users may change their password by entering their current password and confirming a new one.
+
+### Delete Account
+
+Users may permanently delete their account. Upon confirmation, all data associated with the account, including shortlisted vehicles, comparison entries and login credentials, is removed from the database.
 
 ## Acknowledgments
-I used parts of the CS50 Finance assignment (specifically those associated with logging in, logging out and the navbar design) for this project, modifying them to some extent for this project. I also used Claude (Anthropic) to help debug parts of this project, specifically the cascading dropdown logic used in index.html and the approach for passing vehicle data from Flask to JavaScript using
-Jinja's `tojson` filter.
+
+Portions of the CS50 Finance problem set, specifically the login and logout functionality and the navigation bar design, were adapted for this project.
