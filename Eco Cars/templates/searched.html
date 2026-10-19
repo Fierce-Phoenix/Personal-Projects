@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search result
+{% endblock %}
+
+{% block main %}
+{% for result in results %}
+<h1 class="eco-heading">{{ result.make }}</h1>
+<h2 class="eco-heading">{{ result.model }}</h2>
+<h3 class="eco-heading">{{ result.year}}</h3>
+
+<div class = "table-responsive">
+<table class = "table table-hover table-bordered align-middle eco-table">
+    <thead class="table-success">
+        <tr>
+            <th>
+                Class
+            </th>
+            <th>
+                Drive
+            </th>
+            <th>
+                Cylinders
+            </th>
+            <th>
+                Displacement
+            </th>
+            <th>
+                Fuel type
+            </th>
+            <th>
+                City MPG
+            </th>
+            <th>
+                Highway MPG
+            </th>
+            <th>
+                Combined MPG
+            </th>
+            <th>
+                CO2 GPM
+            </th>
+            <th>
+                Shortlist
+            </th>
+            <th>
+                Compare
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                {{result.vehicle_class}}
+            </td>
+            <td>
+                {{result.drive}}
+            </td>
+            <td>
+                {{result.cylinders}}
+            </td>
+            <td>
+                {{result.displacement}}
+            </td>
+            <td>
+                {{result.fuel_type}}
+            </td>
+            <td>
+                {{result.city_mpg}}
+            </td>
+            <td>
+                {{result.highway_mpg}}
+            </td>
+            <td>
+                {{result.combined_mpg}}
+            </td>
+            <td>
+                {{result.co2_gpm}}
+            </td>
+            <td>
+                <form action = "/shortlisted_vehicles", method = "post">
+                    <input type="hidden" name="car_id" value="{{ result.car_id or '' }}">
+                    <button type = "submit" class="btn btn-success btn-sm">Shortlist</button>
+                </form>
+            </td>
+            <td>
+                <form action = "/compare", method = "post">
+                    <input type="hidden" name="car_id" value="{{ result.car_id or '' }}">
+                    <button type = "submit" class="btn btn-outline-primary btn-sm">Compare</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endfor %}
+{% endblock %}

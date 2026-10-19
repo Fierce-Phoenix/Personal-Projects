@@ -1,0 +1,135 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block main %}
+
+<div id="calculator">
+If you drive <input type="number" id="miles" value="0" min="1" class="form-control d-inline-block w-auto mx-1"> miles in a
+<select id="make-select" class="form-select d-inline-block w-auto mx-1">
+    <option value="">Select make</option>
+</select>
+<select id="model-select" class="form-select d-inline-block w-auto mx-1">
+    <option value="">Select model</option>
+</select>
+<select id="year-select" class="form-select d-inline-block w-auto mx-1">
+    <option value="">Select year</option>
+</select>
+<select id="fuel-select" class="form-select d-inline-block w-auto mx-1">
+    <option value="">Select fuel type</option>
+</select>
+you will release <span id="emission-output" class="eco-highlight"></span> tons of CO2 and have burnt <span id="combinedMpg" class="eco-highlight"></span> gallons of fuel.
+</div>
+
+<script>
+// Data is embedded server-side
+const vehicles = {{ vehicles | tojson }};
+
+function unique(arr) {
+    return [...new Set(arr)].sort();
+}
+
+function fillSelect(select, values) {
+    //Delete all other options
+    select.options.length = 1
+
+    //Add new options
+    for (const value of values) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+    }
+}
+
+const makeSelect = document.getElementById("make-select");
+const modelSelect = document.getElementById("model-select");
+const yearSelect = document.getElementById("year-select");
+const fuelSelect = document.getElementById("fuel-select");
+const milesInput = document.getElementById("miles");
+const emissionOutput = document.getElementById("emission-output");
+const combinedMpg = document.getElementById("combinedMpg")
+
+function updateEmission() {
+    //You are searching for matches in the json and updating the emission
+    const make = makeSelect.value;
+    const model = modelSelect.value;
+    const year = yearSelect.value;
+    const fuel = fuelSelect.value;
+    const miles = parseFloat(milesInput.value);
+
+    if (!make || !model || !year || !fuel || !miles) {
+        emissionOutput.textContent = "";
+        combinedMpg.textContent = "";
+        return;
+    }
+
+    const match = vehicles.find(v =>
+        v.make === make && v.model === model &&
+        String(v.year) === year && v.fuel_type === fuel
+    );
+
+    console.log(match);
+
+    if (!match) {
+        emissionOutput.textContent = "";
+        combinedMpg.textContent = "";
+        return;
+    }
+
+    const totalGrams = match.co2_gpm * miles;
+    const totalTons = totalGrams / 1000000;
+    emissionOutput.textContent = totalTons.toFixed(2);
+
+    const fuelBurnt = miles / match.combined_mpg
+    console.log(fuelBurnt);
+    combinedMpg.textContent = fuelBurnt.toFixed(2);
+}
+
+makeSelect.addEventListener("change", () => {
+    const make = makeSelect.value;
+    const models = make
+        ? unique(vehicles.filter(v => v.make === make).map(v => v.model))
+        : [];
+    fillSelect(modelSelect, models);
+
+    fillSelect(yearSelect, []);
+    fillSelect(fuelSelect, []);
+    updateEmission();
+});
+
+modelSelect.addEventListener("change", () => {
+    const make = makeSelect.value;
+    const model = modelSelect.value;
+    const years = model
+        ? unique(vehicles.filter(v => v.make === make && v.model === model).map(v => v.year))
+        : [];
+    fillSelect(yearSelect, years);
+
+    fillSelect(fuelSelect, []);
+    updateEmission();
+});
+
+yearSelect.addEventListener("change", () => {
+    const make = makeSelect.value;
+    const model = modelSelect.value;
+    const year = yearSelect.value;
+    const fuels = year
+        ? unique(vehicles.filter(v =>
+            v.make === make && v.model === model && String(v.year) === year
+          ).map(v => v.fuel_type))
+        : [];
+    fillSelect(fuelSelect, fuels);
+    updateEmission();
+});
+
+fuelSelect.addEventListener("change", updateEmission);
+milesInput.addEventListener("input", updateEmission);
+
+// Populate makes immediately — data's already here, no async wait at all.
+fillSelect(makeSelect, unique(vehicles.map(v => v.make)));
+</script>
+
+{% endblock %}

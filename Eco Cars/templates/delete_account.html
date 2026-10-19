@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Account
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4 eco-heading">Delete Account</h2>
+    <form action = "/delete_account" method = "post">
+        <div class = "mb-3">
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Re-enter Password" type="password">
+        </div>
+        <button class="btn btn-danger" type="submit">Delete Account</button>
+    </form>
+    {% if confirm %}
+    <form action = "/delete_account/confirm" method = "post">
+        <div class = "mb-3">
+        <button class = "btn btn-outline-danger" type = "submit">Confirm deletion of account</button>
+        </div>
+    </form>
+    {% endif %}
+
+{% endblock %}

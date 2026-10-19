@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Shortlisted vehicles
+{% endblock %}
+
+{% block main %}
+<h2 class="mb-4" style="color: var(--eco-forest);">Compare Vehicles</h2>
+<div class = "table-responsive">
+<table class = "table table-hover table-bordered align-middle eco-table">
+    <thead class="table-success">
+        <tr>
+            <th>
+                Make
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Year
+            </th>
+            <th>
+                Class
+            </th>
+            <th>
+                Drive
+            </th>
+            <th>
+                Cylinders
+            </th>
+            <th>
+                Displacement
+            </th>
+            <th>
+                Fuel type
+            </th>
+            <th>
+                City MPG
+            </th>
+            <th>
+                Highway MPG
+            </th>
+            <th>
+                Combined MPG
+            </th>
+            <th>
+                CO2 GPM
+            </th>
+            <th>
+                Shortlist
+            </th>
+            <th>
+                Remove
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for car in cars %}
+        <tr>
+            <td>
+                {{car.make}}
+            </td>
+            <td>
+                {{car.model}}
+            </td>
+            <td>
+                {{car.year}}
+            </td>
+            <td>
+                {{car.vehicle_class}}
+            </td>
+            <td>
+                {{car.drive}}
+            </td>
+            <td>
+                {{car.cylinders}}
+            </td>
+            <td>
+                {{car.displacement}}
+            </td>
+            <td>
+                {{car.fuel_type}}
+            </td>
+            <td>
+                {{car.city_mpg}}
+            </td>
+            <td>
+                {{car.highway_mpg}}
+            </td>
+            <td>
+                {{car.combined_mpg}}
+            </td>
+            <td>
+                {{car.co2_gpm}}
+            </td>
+            <td>
+                <form action = "/shortlisted_vehicles", method = "post">
+                    <input type="hidden" name="car_id" value="{{ car.car_id or '' }}">
+                    <button type = "submit" class="btn btn-success btn-sm">Shortlist</button>
+                </form>
+            </td>
+            <td>
+                <form action = "/compare/remove", method = "post">
+                    <input type="hidden" name="car_id" value="{{ car.car_id or '' }}">
+                    <button type = "submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
